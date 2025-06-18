@@ -35,6 +35,7 @@ function Nav({ contacts, filtrarContatos }) {
       );
     } else {
       filtrarContatos(contacts);
+
     }
   };
 
