@@ -16,7 +16,7 @@ function Nav({ contacts, filtrarContatos }) {
     if (busca.trim() != "") {
       filtrarContatos(
         contacts.filter((contato) =>
-          contato.name.toLowerCase().includes(busca.toLowerCase())
+          contato.nome.toLowerCase().includes(busca.toLowerCase())
         )
       );
       setBusca("");
@@ -30,12 +30,11 @@ function Nav({ contacts, filtrarContatos }) {
     if (busca.trim() != "") {
       filtrarContatos(
         contacts.filter((contato) =>
-          contato.name.toLowerCase().includes(busca.toLowerCase())
+          contato.nome.toLowerCase().includes(busca.toLowerCase())
         )
       );
     } else {
       filtrarContatos(contacts);
-
     }
   };
 
@@ -46,20 +45,20 @@ function Nav({ contacts, filtrarContatos }) {
       px-10 py-5"
       >
         <form onSubmit={handleBusca}>
-          <InputButtonProvider>
-            <InputButton>
-              <InputButtonAction>Buscar por um contato</InputButtonAction>
+          <InputButtonProvider className="w-full">
+            <InputButton className="w-full">
+              <InputButtonAction className="w-full">Buscar por um contato</InputButtonAction>
               <InputButtonSubmit type="submit">
                 <Search />
               </InputButtonSubmit>
             </InputButton>
             <InputButtonInput
+              className="w-full"
               type="text"
-              placeholder="Busque por um contato"
+              placeholder="Buscar"
               value={busca}
               onChange={(e) => {
                 setBusca(e.target.value);
-                buscarContato();
               }}
             />
           </InputButtonProvider>
