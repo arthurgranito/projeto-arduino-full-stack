@@ -33,10 +33,8 @@ function Nav({ contacts, filtrarContatos }) {
           contato.name.toLowerCase().includes(busca.toLowerCase())
         )
       );
-      setBusca("");
     } else {
       filtrarContatos(contacts);
-      setBusca("");
     }
   };
 
