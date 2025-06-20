@@ -7,7 +7,7 @@ function App() {
   const [contacts, setContacts] = useState([]);
   const [contatosFiltrados, setContatosFiltrados] = useState(contacts);
 
-  const urlApi = "http://localhost:8080/contatos";
+  const urlApi = "https://backend-arduino-damp-hill-3.fly.dev/contatos";
 
   const fetchContatos = async () => {
     const response = await axios.get(urlApi);

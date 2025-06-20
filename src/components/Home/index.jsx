@@ -32,7 +32,7 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 
 const Home = ({ contacts, onDelete, onCadastro, onEditar }) => {
-  const urlApi = "http://localhost:8080/contatos";
+  const urlApi = "http://backend-arduino-damp-hill-3.fly.dev/contatos";
 
   // Estados para edição
   const [idEditando, setIdEditando] = useState(null);

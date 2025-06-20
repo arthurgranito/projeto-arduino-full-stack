@@ -10,7 +10,7 @@ const Cadastro = ({ onCadastro }) => {
   const [email, setEmail] = useState("");
   const [relacao, setRelacao] = useState("");
 
-  const urlApi = "http://localhost:8080/contatos";
+  const urlApi = "https://backend-arduino-damp-hill-3.fly.dev/contatos";
 
   const handleCadastro = (e) => {
     e.preventDefault();
