@@ -88,8 +88,7 @@ const Home = ({ contacts, onDelete, onCadastro, onEditar }) => {
       if (!response.ok) {
         throw new Error('Erro na requisição: ' + response.status);
       }
-      const dados = await response.json();
-      console.log('Contato deletado com sucesso:', dados);
+      console.log('Contato deletado com sucesso');
       onDelete();
     } catch (error) {
       console.error("Erro ao excluir contato:", error);
