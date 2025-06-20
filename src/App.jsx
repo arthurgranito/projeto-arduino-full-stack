@@ -10,10 +10,18 @@ function App() {
   const urlApi = "https://backend-arduino-damp-hill-3.fly.dev/contatos";
 
   const fetchContatos = async () => {
-    const response = await axios.get(urlApi);
-    setContacts(response.data);
-    console.log(response.data);
-    setContatosFiltrados(response.data);
+    try {
+      const response = await fetch(urlApi);
+      if(!response.ok){
+        throw new Error("Erro ao buscar contatos");
+      }
+      const data = await response.json();
+      console.log(data);
+      setContacts(data);
+      setContatosFiltrados(data);
+    } catch (error) {
+      console.error("Erro ao buscar contatos:", error);
+    }
   };
 
   useEffect(() => {

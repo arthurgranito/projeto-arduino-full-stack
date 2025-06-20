@@ -50,14 +50,24 @@ const Home = ({ contacts, onDelete, onCadastro, onEditar }) => {
 
   const handleEditar = async (e) => {
     e.preventDefault();
-    const contatoAtualizado = {
-      id: idEditando,
-      nome: nomeAtualizado,
-      telefone: telefoneAtualizado,
-      descricao: descricaoAtualizada,
-    };
     try {
-      await axios.put(`${urlApi}/${idEditando}`, contatoAtualizado);
+      const response = await fetch(urlApi, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: idEditando,
+          nome: nomeAtualizado,
+          telefone: telefoneAtualizado,
+          descricao: descricaoAtualizada
+        })
+      });
+      if (!response.od) {
+        throw new Error('Erro na requisição: ' + response.status);
+      }
+      const dados = await response.json();
+      console.log('Atualizado com sucesso:', dados);
       onEditar(); // Atualiza a lista
     } catch (error) {
       console.error("Erro ao editar contato:", error);
@@ -72,7 +82,14 @@ const Home = ({ contacts, onDelete, onCadastro, onEditar }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${urlApi}/${id}`);
+      const response = await fetch(`${urlApi}/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Erro na requisição: ' + response.status);
+      }
+      const dados = await response.json();
+      console.log('Contato deletado com sucesso:', dados);
       onDelete();
     } catch (error) {
       console.error("Erro ao excluir contato:", error);
