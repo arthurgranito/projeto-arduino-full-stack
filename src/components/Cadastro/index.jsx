@@ -20,6 +20,17 @@ const Cadastro = ({ onCadastro }) => {
     setTelefone("");
     setRelacao("");
     onCadastro();
+    Toastify({
+      text: "Contato cadastrado com sucesso!",
+      duration: 3000,
+      close: false,
+      gravity: "bottom",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "oklch(72.3% 0.219 149.579)",
+      },
+    }).showToast();
   };
 
   return (

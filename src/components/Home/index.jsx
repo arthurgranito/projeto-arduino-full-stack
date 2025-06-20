@@ -52,23 +52,34 @@ const Home = ({ contacts, onDelete, onCadastro, onEditar }) => {
     e.preventDefault();
     try {
       const response = await fetch(`${urlApi}/${idEditando}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           id: idEditando,
           nome: nomeAtualizado,
           telefone: telefoneAtualizado,
-          descricao: descricaoAtualizada
-        })
+          descricao: descricaoAtualizada,
+        }),
       });
       if (!response.ok) {
-        throw new Error('Erro na requisição: ' + response.status);
+        throw new Error("Erro na requisição: " + response.status);
       }
       const dados = await response.json();
-      console.log('Atualizado com sucesso:', dados);
-      onEditar(); // Atualiza a lista
+      console.log("Atualizado com sucesso:", dados);
+      onEditar();
+      Toastify({
+        text: "Contato atualizado com sucesso!",
+        duration: 3000,
+        close: false,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "oklch(72.3% 0.219 149.579)",
+        },
+      }).showToast(); // Atualiza a lista
     } catch (error) {
       console.error("Erro ao editar contato:", error);
     } finally {
@@ -83,13 +94,24 @@ const Home = ({ contacts, onDelete, onCadastro, onEditar }) => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(`${urlApi}/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       if (!response.ok) {
-        throw new Error('Erro na requisição: ' + response.status);
+        throw new Error("Erro na requisição: " + response.status);
       }
-      console.log('Contato deletado com sucesso');
+      console.log("Contato deletado com sucesso");
       onDelete();
+      Toastify({
+        text: "Contato excluído com sucesso!",
+        duration: 3000,
+        close: false,
+        gravity: "bottom",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+          background: "oklch(63.7% 0.237 25.331)",
+        },
+      }).showToast();
     } catch (error) {
       console.error("Erro ao excluir contato:", error);
     }
