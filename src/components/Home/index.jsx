@@ -51,7 +51,7 @@ const Home = ({ contacts, onDelete, onCadastro, onEditar }) => {
   const handleEditar = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(urlApi, {
+      const response = await fetch(`${urlApi}/${idEditando}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
