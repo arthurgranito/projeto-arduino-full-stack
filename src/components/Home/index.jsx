@@ -63,7 +63,7 @@ const Home = ({ contacts, onDelete, onCadastro, onEditar }) => {
           descricao: descricaoAtualizada
         })
       });
-      if (!response.od) {
+      if (!response.ok) {
         throw new Error('Erro na requisição: ' + response.status);
       }
       const dados = await response.json();
