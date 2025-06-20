@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   CardContent,
@@ -31,8 +31,36 @@ import Cadastro from "../Cadastro";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 
-const Home = ({ contacts, onDelete, onCadastro, onEditar }) => {
+const Home = () => {
   const urlApi = "https://backend-arduino-damp-hill-3.fly.dev/contatos";
+
+  const [fetchContacts, setFetchContacts] = useState([]);
+
+  const fetchContactsAPI = async () => {
+    try {
+      const response = await fetch(urlApi);
+      if (!response.ok) {
+        throw new Error("Erro ao buscar contatos");
+      }
+      const data = await response.json();
+      console.log(data);
+      setFetchContacts(data);
+    } catch (error) {
+      console.error("Erro ao buscar contatos:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchContactsAPI();
+  }, []);
+
+  const onDelete = async () => {
+    await fetchContactsAPI();
+  };
+
+  const onEditar = async () => {
+    await fetchContactsAPI();
+  };
 
   // Estados para edição
   const [idEditando, setIdEditando] = useState(null);
@@ -125,13 +153,13 @@ const Home = ({ contacts, onDelete, onCadastro, onEditar }) => {
 
       <Tabs defaultValue="contatos" className="m-4 rounded-lg">
         <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="contatos">Contatos</TabsTrigger>
+          <TabsTrigger value="contatos" onClick={fetchContactsAPI}>Contatos</TabsTrigger>
           <TabsTrigger value="cadastro">Cadastrar Contato</TabsTrigger>
         </TabsList>
 
         <TabsContents className="mx-1 mb-1 -mt-2 rounded-sm h-full bg-background">
           <TabsContent value="contatos" className="space-y-6 p-6">
-            {contacts.length === 0 ? (
+            {fetchContacts.length === 0 ? (
               <div className="flex justify-center items-center">
                 <p className="text-xl font-semibold">
                   Nenhum contato encontrado!
@@ -139,7 +167,7 @@ const Home = ({ contacts, onDelete, onCadastro, onEditar }) => {
               </div>
             ) : (
               <div className="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 w-full justify-center items-center">
-                {contacts.map((contato) => {
+                {fetchContacts.map((contato) => {
                   const fallback = contato.nome.split(" ");
 
                   return (
@@ -266,7 +294,7 @@ const Home = ({ contacts, onDelete, onCadastro, onEditar }) => {
           </TabsContent>
 
           <TabsContent value="cadastro" className="space-y-6 p-6">
-            <Cadastro onCadastro={onCadastro} />
+            <Cadastro />
           </TabsContent>
         </TabsContents>
       </Tabs>

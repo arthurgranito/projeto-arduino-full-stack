@@ -31,7 +31,7 @@ function App() {
   return (
     <>
       <Nav contacts={contacts} filtrarContatos={setContatosFiltrados} />
-      <Home contacts={contatosFiltrados} onDelete={fetchContatos} onCadastro={fetchContatos} onEditar={fetchContatos} />
+      <Home />
     </>
   );
 }

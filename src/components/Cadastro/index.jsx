@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import axios from "axios";
 
-const Cadastro = ({ onCadastro }) => {
+const Cadastro = () => {
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
   const [email, setEmail] = useState("");
@@ -19,7 +19,6 @@ const Cadastro = ({ onCadastro }) => {
     setNome("");
     setTelefone("");
     setRelacao("");
-    onCadastro();
     Toastify({
       text: "Contato cadastrado com sucesso!",
       duration: 3000,
